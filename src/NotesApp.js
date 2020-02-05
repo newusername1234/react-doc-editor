@@ -9,6 +9,7 @@ class NotesApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentNoteId: '',
             searchText: 'this is the search text',
             notes: [
                 {
@@ -41,6 +42,7 @@ class NotesApp extends React.Component {
                 />
                 <NotesList 
                     notes={this.state.notes}
+                    handleClick={this._selectNote}
                 />
                 <NoteEditor />
             </div>
@@ -50,6 +52,14 @@ class NotesApp extends React.Component {
     _setSearchText = (searchText) => {
         this.setState({
             searchText
+        });
+    }
+
+    _selectNote = (currentNoteId) => {
+        this.setState({
+            currentNoteId
+        }, () => {
+            console.log('updated current id')
         });
     }
 }

@@ -1,9 +1,12 @@
 import React from 'react';
 import NotesList from './NotesList';
 
-function NotesListItem({id, title}) {
+function NotesListItem({handleClick, id, title}) {
     return (
-        <li>{title}</li>
+        <li onClick={() => {
+            console.log(`you clicked ${id}`);
+            handleClick(id);
+        }}>{title}</li>
     );
 }
 

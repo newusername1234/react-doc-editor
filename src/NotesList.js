@@ -1,7 +1,7 @@
 import React from 'react';
 import NotesListItem from './NotesListItem';
 
-function NotesList({notes}) {
+function NotesList({handleClick, notes}) {
     return (
         <ul>
             {
@@ -11,6 +11,7 @@ function NotesList({notes}) {
                         id={note.id} 
                         title={note.title}
                         key={note.id}
+                        handleClick={handleClick}
                     />
                 ))
             }
