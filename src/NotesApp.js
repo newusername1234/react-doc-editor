@@ -13,19 +13,19 @@ class NotesApp extends React.Component {
             searchText: '',
             notes: [
                 {
-                    id: 'aaaaa',
+                    id: '1',
                     title: 'first note',
-                    copy: 'lalala'
+                    copy: 'study'
                 },
                 {
-                    id: '44444',
+                    id: '2',
                     title: 'second note',
-                    copy: 'bababa'
+                    copy: 'sleep'
                 },
                 {
-                    id: 'a1b2c5',
+                    id: '3',
                     title: 'third note',
-                    copy: 'hahaha'
+                    copy: 'study more'
                 },
             ]
         };
@@ -34,7 +34,7 @@ class NotesApp extends React.Component {
     render() {
         return (
             <div>
-                <h1>this is my notes app</h1>
+                <h1>REACT NOTES APP</h1>
                 <NewNote />
                 <SearchBar 
                     setText={this._setSearchText} 
@@ -44,9 +44,17 @@ class NotesApp extends React.Component {
                     notes={this._getFilteredNotes()}
                     handleClick={this._selectNote}
                 />
-                <NoteEditor />
+                <NoteEditor 
+                    displayedNote={this._displayNote()}
+                />
             </div>
         );
+    }
+
+    _displayNote = () => {
+        const chosenNote = this.state.notes.filter(note => note.id === this.state.currentNoteId);
+        
+        return chosenNote;
     }
 
     _getFilteredNotes = () => {

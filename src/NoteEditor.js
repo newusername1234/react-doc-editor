@@ -1,8 +1,13 @@
 import React from 'react';
 
-function NoteEditor() {
+function NoteEditor({displayedNote, updateNote}) {
     return (
-        <textarea value="lorem ipsum blah blah"></textarea>
+        <textarea 
+            onChange={(event) => {
+                updateNote(event.target.value)
+            }} 
+            value={displayedNote.map(note => note.copy)}
+        />
     )
 }
 
