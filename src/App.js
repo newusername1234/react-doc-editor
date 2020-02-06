@@ -6,7 +6,9 @@ import NotesApp from './NotesApp';
 
 function App() {
   return (
-    <NotesApp />
+    <div className="App-header">
+      <NotesApp />
+    </div>
   );
 }
 

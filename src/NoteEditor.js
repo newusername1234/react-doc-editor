@@ -4,40 +4,69 @@ class NoteEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            changedNote: {}
         };
     }
 
-    render() {
+    // receiving the new props and the existing state
+    static getDerivedStateFromProps(props, state) {
+        console.log('we are in getDerivedStateFromProps');
+        console.table(props.note);
+        console.table(state.changedNote);
         
-        const { note, handleChange } = this.props;
+        if (props.note.id === state.changedNote.id) {
+            return {
+                ...state
+            }
+        } else {
+            return {
+                ...state,
+                changedNote: {
+                    ...props.note
+                }
+            }
+        }
+    }
+
+    render() {
 
         return (
             <div>
-                <input 
-                    value={note.title}
-                    onChange={(event) => {
-                        // dont mutate an object or array that you receive as an argument
-                        // note.title = event.target.value
-                        // instead, send back a copy with the updated title
-                        handleChange({
-                            ...note,
-                            title: event.target.value
-                        });
-                    }}
-                />
-                <br />
-                <textarea 
-                    value={note.copy}
-                    onChange={(event) => {
-                        handleChange({
-                            ...note,
-                            copy: event.target.value
-                        })
-                    }}    
-                />
+                <form  onSubmit={this._handleSubmit}>
+                    <input 
+                        value={this.state.changedNote.title}
+                        onChange={(event) => {
+                            this._updateLocalNote({
+                                ...this.state.changedNote,
+                                title: event.target.value
+                            });
+                        }}
+                    />
+                    <br />
+                    <textarea 
+                        value={this.state.changedNote.copy}
+                        onChange={(event) => {
+                            this._updateLocalNote({
+                                ...this.state.changedNote,
+                                copy: event.target.value
+                            })
+                        }}    
+                    />
+                    <button>Save</button>
+                </form>
             </div>
         )
+    }
+
+    _handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.handleChange(this.state.changedNote);
+    }
+
+    _updateLocalNote = (changedNote) => {
+        this.setState({
+            changedNote
+        });
     }
 
 }
