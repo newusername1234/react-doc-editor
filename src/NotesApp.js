@@ -45,12 +45,25 @@ class NotesApp extends React.Component {
                     handleClick={this._selectNote}
                 />
                 <NoteEditor 
+                    handleChange={this._updateNote}
                     note={this._getNoteById()}
                 />
             </div>
         );
     }
 
+    _updateNote = (changedNote) => {
+        console.table(changedNote);
+        this.setState({
+            notes: this.state.notes.map(note => {
+                if (note.id !== this.state.currentNoteId) {
+                    return note;
+                } else {
+                    return changedNote;
+                }
+            })
+        })
+    }
 
     _getNoteById = () => this.state.notes.find(note => note.id === this.state.currentNoteId) || {};
 
