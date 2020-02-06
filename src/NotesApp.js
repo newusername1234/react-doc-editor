@@ -45,17 +45,20 @@ class NotesApp extends React.Component {
                     handleClick={this._selectNote}
                 />
                 <NoteEditor 
-                    displayedNote={this._displayNote()}
+                    note={this._getNoteById()}
                 />
             </div>
         );
     }
 
-    _displayNote = () => {
-        const chosenNote = this.state.notes.filter(note => note.id === this.state.currentNoteId);
+
+    _getNoteById = () => this.state.notes.find(note => note.id === this.state.currentNoteId) || {};
+
+    // _displayNote = () => {
+    //     const chosenNote = this.state.notes.filter(note => note.id === this.state.currentNoteId);
         
-        return chosenNote;
-    }
+    //     return chosenNote;
+    // }
 
     _getFilteredNotes = () => {
         const filteredArray = this.state.notes.filter(note => {
